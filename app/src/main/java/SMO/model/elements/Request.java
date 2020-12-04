@@ -4,7 +4,7 @@ public class Request {
     private final int sourceNumber;
     private final double creationTime;
 
-    private int number = 0;
+    private int number = -1;
     private int deviceNumber = 0;
     private double deviceTime = 0;
     private double releaseTime = 0;

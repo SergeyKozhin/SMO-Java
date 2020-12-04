@@ -59,7 +59,7 @@ public class StepModeView {
     private void initialize() {
         timeColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getEvent().getTime()).asObject());
         typeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEvent().getType().toString()));
-        requestColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getEvent().getRequest().getNumber()).asObject());
+        requestColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRequestNumber()).asObject());
         processedColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getProcessed()).asObject());
         rejectedColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRejected()).asObject());
 
@@ -135,6 +135,7 @@ public class StepModeView {
         Event lasEvent = system.makeNextStep();
         states.add(new SystemState(
                 lasEvent,
+                lasEvent.getRequest().getNumber(),
                 system.getProcessed().size(),
                 system.getRejected().size()
         ));
@@ -169,7 +170,8 @@ public class StepModeView {
         app.openSettingsWindow();
     }
 
-    @FXML private void onResults() {
+    @FXML
+    private void onResults() {
         app.openStepResultsWindow(system);
     }
 

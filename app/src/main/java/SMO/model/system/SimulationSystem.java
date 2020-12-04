@@ -58,8 +58,10 @@ public class SimulationSystem {
 
         lastEvent = events.remove(events.size() - 1);
         Request request = lastEvent.getRequest();
-        request.setNumber(requestCount);
-        requestCount++;
+        if (request.getNumber() == -1) {
+            request.setNumber(requestCount);
+            requestCount++;
+        }
 
         switch (lastEvent.getType()) {
             case REQUEST_CREATED -> {
