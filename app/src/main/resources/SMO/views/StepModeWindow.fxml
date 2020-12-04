@@ -20,8 +20,8 @@
                     <columns>
                       <TableColumn fx:id="timeColumn" prefWidth="70.0" text="Time" />
                       <TableColumn fx:id="typeColumn" prefWidth="145.0" text="Type" />
-                        <TableColumn fx:id="createdColumn" prefWidth="65.0" text="Created" />
-                        <TableColumn fx:id="processedColumn" prefWidth="89.0" text="Processed" />
+                        <TableColumn fx:id="requestColumn" prefWidth="71.0" text="Request" />
+                        <TableColumn fx:id="processedColumn" prefWidth="83.0" text="Processed" />
                         <TableColumn fx:id="rejectedColumn" prefWidth="73.0" text="Rejected" />
                     </columns>
                   </TableView>

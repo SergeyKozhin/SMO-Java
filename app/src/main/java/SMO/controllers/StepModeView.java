@@ -38,7 +38,7 @@ public class StepModeView {
     private TableColumn<SystemState, String> typeColumn;
 
     @FXML
-    private TableColumn<SystemState, Integer> createdColumn;
+    private TableColumn<SystemState, Integer> requestColumn;
 
     @FXML
     private TableColumn<SystemState, Integer> processedColumn;
@@ -59,7 +59,7 @@ public class StepModeView {
     private void initialize() {
         timeColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getEvent().getTime()).asObject());
         typeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEvent().getType().toString()));
-        createdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCreated()).asObject());
+        requestColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getEvent().getRequest().getNumber()).asObject());
         processedColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getProcessed()).asObject());
         rejectedColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getRejected()).asObject());
 
@@ -135,7 +135,6 @@ public class StepModeView {
         Event lasEvent = system.makeNextStep();
         states.add(new SystemState(
                 lasEvent,
-                system.getRequestCount(),
                 system.getProcessed().size(),
                 system.getRejected().size()
         ));

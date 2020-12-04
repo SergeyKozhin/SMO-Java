@@ -16,6 +16,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
@@ -43,6 +44,12 @@ public class SettingsWindow {
     private TextField bufferSIzeText;
     @FXML
     private TextField requestNumberText;
+    @FXML
+    private TextField allSourcesText;
+    @FXML
+    private TextField allAlphaText;
+    @FXML
+    private TextField allBetaText;
 
     private App app;
     private final FileChooser fileChooser = new FileChooser();
@@ -120,10 +127,82 @@ public class SettingsWindow {
         if (file == null) {
             return;
         }
-        try (Writer writer = new FileWriter(file)){
+        try (Writer writer = new FileWriter(file)) {
             gson.toJson(config, writer);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void setSources() {
+        StringBuilder err = new StringBuilder();
+        double lambda = 0;
+        try {
+            lambda = Double.parseDouble(allSourcesText.getText());
+            if (lambda <= 0) {
+                err.append("Lambda must be positive!\n");
+            }
+        } catch (NumberFormatException e) {
+            err.append("Lambda must be float!\n");
+        }
+
+        if (err.length() != 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(app.getPrimaryStage());
+            alert.setTitle("Invalid fields");
+            alert.setHeaderText("Set valid lambda");
+            alert.setContentText(err.toString());
+
+            alert.showAndWait();
+        } else {
+            for (Node child : sourceConfigs.getChildren()) {
+                ((SourceConfigComponent) child).setLambda(lambda);
+            }
+        }
+    }
+
+    @FXML
+    private void setDevices() {
+        StringBuilder err = new StringBuilder();
+        double alpha = 0;
+        double beta = 0;
+
+        try {
+            alpha = Double.parseDouble(allAlphaText.getText());
+            if (alpha < 0) {
+                err.append("Alpha must be not negative!\n");
+            }
+        } catch (NumberFormatException e) {
+            err.append("Alpha must be float!\n");
+        }
+        try {
+            beta = Double.parseDouble(allBetaText.getText());
+            if (beta < 0) {
+                err.append("Beta must be not negative!\n");
+            }
+        } catch (NumberFormatException e) {
+            err.append("Beta must be float!\n");
+        }
+
+        if (beta < alpha) {
+            err.append("Beta must be larger then alpha!\n");
+        }
+
+
+        if (err.length() != 0) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(app.getPrimaryStage());
+            alert.setTitle("Invalid fields");
+            alert.setHeaderText("Set valid lambda");
+            alert.setContentText(err.toString());
+
+            alert.showAndWait();
+        } else {
+            for (Node child : deviceConfigs.getChildren()) {
+                ((DeviceConfigComponent) child).setAlpha(alpha);
+                ((DeviceConfigComponent) child).setBeta(beta);
+            }
         }
     }
 
@@ -142,7 +221,7 @@ public class SettingsWindow {
                 config.getRequestNumber()
         );
 
-       app.openStepModeWindow(system);
+        app.openStepModeWindow(system);
     }
 
     private void applyConfig(SystemConfig config) {
@@ -150,13 +229,13 @@ public class SettingsWindow {
             return;
         }
         sourceConfigs.getChildren().clear();
-        for (SourceConfig sourceConfig: config.getSourceConfigs()) {
+        for (SourceConfig sourceConfig : config.getSourceConfigs()) {
             SourceConfigComponent component = addSourceConfig();
             component.setLambda(sourceConfig.getFrequency());
         }
 
         deviceConfigs.getChildren().clear();
-        for (DeviceConfig deviceConfig: config.getDeviceConfigs()) {
+        for (DeviceConfig deviceConfig : config.getDeviceConfigs()) {
             DeviceConfigComponent component = addDeviceConfig();
             component.setAlpha(deviceConfig.getAlpha());
             component.setBeta(deviceConfig.getBeta());

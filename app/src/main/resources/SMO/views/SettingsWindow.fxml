@@ -30,5 +30,13 @@
       <Button layoutX="1091.0" layoutY="609.0" mnemonicParsing="false" onAction="#openStepMode" prefHeight="89.0" prefWidth="171.0" text="Start simulation" />
       <Button layoutX="872.0" layoutY="609.0" mnemonicParsing="false" onAction="#loadFromFile" prefHeight="41.0" prefWidth="171.0" text="Load from file" />
       <Button layoutX="872.0" layoutY="657.0" mnemonicParsing="false" onAction="#saveToFile" prefHeight="41.0" prefWidth="171.0" text="Save to file" />
+      <TextField fx:id="allSourcesText" layoutX="290.0" layoutY="14.0" prefHeight="26.0" prefWidth="110.0" />
+      <Button layoutX="414.0" layoutY="14.0" mnemonicParsing="false" onAction="#setSources" prefHeight="26.0" prefWidth="110.0" text="Set all" />
+      <Label layoutX="224.0" layoutY="19.0" text="Lambda" />
+      <TextField fx:id="allAlphaText" layoutX="899.0" layoutY="14.0" prefHeight="26.0" prefWidth="100.0" />
+      <Button layoutX="1152.0" layoutY="14.0" mnemonicParsing="false" onAction="#setDevices" prefHeight="26.0" prefWidth="110.0" text="Set all" />
+      <Label layoutX="847.0" layoutY="19.0" text="Alpha" />
+      <TextField fx:id="allBetaText" layoutX="1050.0" layoutY="14.0" prefHeight="26.0" prefWidth="91.0" />
+      <Label layoutX="1013.0" layoutY="19.0" text="Beta" />
    </children>
 </AnchorPane>
