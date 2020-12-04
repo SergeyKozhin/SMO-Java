@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SMO.controllers.StepModeView">
+   <children>
+      <ScrollPane fx:id="mainScroll" layoutX="14.0" layoutY="14.0" prefHeight="595.0" prefWidth="1252.0">
+         <content>
+            <AnchorPane prefHeight="437.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Events" />
+                  <Label layoutX="469.0" layoutY="12.0" prefHeight="20.0" prefWidth="64.0" text="Buffer" />
+                  <TableView fx:id="bufferTable" fixedCellSize="25.0" layoutX="469.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="371.0" stylesheets="@no-scrollbar.css" />
+                  <TableView fx:id="eventsTable" fixedCellSize="25.0" layoutX="12.0" layoutY="37.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="446.0" stylesheets="@no-scrollbar.css">
+                    <columns>
+                      <TableColumn fx:id="timeColumn" prefWidth="70.0" text="Time" />
+                      <TableColumn fx:id="typeColumn" prefWidth="145.0" text="Type" />
+                        <TableColumn fx:id="createdColumn" prefWidth="65.0" text="Created" />
+                        <TableColumn fx:id="processedColumn" prefWidth="89.0" text="Processed" />
+                        <TableColumn fx:id="rejectedColumn" prefWidth="73.0" text="Rejected" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="853.0" layoutY="14.0" text="Devices" />
+                  <TableView fx:id="devicesTable" fixedCellSize="25.0" layoutX="853.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="360.0" stylesheets="@no-scrollbar.css" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <Button layoutX="948.0" layoutY="644.0" mnemonicParsing="false" onAction="#nextStep" prefHeight="54.0" prefWidth="151.0" text="Next" />
+      <Button layoutX="1115.0" layoutY="645.0" mnemonicParsing="false" onAction="#onResults" prefHeight="54.0" prefWidth="151.0" text="Final Results" />
+      <Button layoutX="21.0" layoutY="644.0" mnemonicParsing="false" onAction="#onBack" prefHeight="54.0" prefWidth="151.0" text="Back" />
+   </children>
+</AnchorPane>
