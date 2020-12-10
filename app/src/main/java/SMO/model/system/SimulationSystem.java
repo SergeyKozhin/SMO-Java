@@ -68,7 +68,7 @@ public class SimulationSystem {
                 Optional<Request> requestOptional = placeRequest(lastEvent.getTime(), request);
                 requestOptional.ifPresent(r -> {
                     r.setReleaseTime(lastEvent.getTime());
-                    rejected.add(r);
+                    events.add(new Event(EventType.REQUEST_REJECTED, lastEvent.getTime(), r));
                 });
 
                 if (generatedCount != requestsNum) {
@@ -82,6 +82,7 @@ public class SimulationSystem {
                 devices.get(request.getDeviceNumber()).setCurrentRequest(null);
                 processNextRequest(lastEvent.getTime());
             }
+            case REQUEST_REJECTED -> rejected.add(request);
         }
 
         return lastEvent;
@@ -120,10 +121,6 @@ public class SimulationSystem {
                 }
             }
         });
-    }
-
-    public int getRequestCount() {
-        return requestCount;
     }
 
     public int getSourcesCount() {

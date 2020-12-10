@@ -3,6 +3,7 @@ package SMO.model.system;
 public enum EventType {
     SIMULATION_STARTED,
     REQUEST_CREATED,
+    REQUEST_REJECTED,
     DEVICE_FINISHED,
     SIMULATION_FINISHED
 }
